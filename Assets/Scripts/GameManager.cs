@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
 	private List<GameObject> balls;
 
 	public Machine[] endMachines;
+	public Sprite[] machineNumbers;
 
 	private static GameManager instance = null;
 	public static GameManager Instance {

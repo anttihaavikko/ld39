@@ -53,14 +53,23 @@ public class Machine : MonoBehaviour {
 
 	public void Activate() {
 
-		screen.sprite = readyScreen;
-
 		if (screenToShow) {
 			Invoke ("ChangeScreen", showDelay);
 		}
+
+		if (respawns < 10) {
+			return;
+		}
+
+		screen.sprite = readyScreen;
 	}
 
 	public void Deactivate() {
+
+		if (respawns < 10) {
+			return;
+		}
+
 		screen.sprite = loadingSprite;
 	}
 
@@ -69,6 +78,7 @@ public class Machine : MonoBehaviour {
 	}
 
 	public void ShowNumber() {
+		screen.sprite = GameManager.Instance.machineNumbers [respawns];
 		Debug.Log (respawns + " spawns left");
 	}
 }
