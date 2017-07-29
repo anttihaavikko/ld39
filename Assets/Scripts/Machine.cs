@@ -5,10 +5,13 @@ using UnityEngine;
 public class Machine : MonoBehaviour {
 
 	public Transform area;
+	public GameObject defaultLetter;
 
 	// Use this for initialization
 	void Start () {
-		
+		if (defaultLetter) {
+			SpawnLetter (defaultLetter);
+		}
 	}
 	
 	// Update is called once per frame
