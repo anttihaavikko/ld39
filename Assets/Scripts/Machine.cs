@@ -99,10 +99,12 @@ public class Machine : MonoBehaviour {
 	}
 
 	public void ChangeScreen() {
+		AudioManager.Instance.PlayEffectAt (9, transform.position, 0.25f);
 		screen.sprite = screenToShow;
 	}
 
 	public void ShowNumber() {
+		AudioManager.Instance.PlayEffectAt (9, transform.position, 0.25f);
 		screen.sprite = GameManager.Instance.machineNumbers [respawns];
 		Debug.Log (respawns + " spawns left");
 	}
