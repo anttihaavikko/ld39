@@ -69,6 +69,8 @@ public class GameManager : MonoBehaviour {
 		dimmer.SetText (text);
 		dimmer.FadeIn (1f);
 
+		AudioManager.Instance.melodyVolume = 0f;
+
 		Invoke ("EnableEnd", 1.5f);
 	}
 
