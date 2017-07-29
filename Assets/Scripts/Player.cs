@@ -20,6 +20,7 @@ public class Player : MonoBehaviour {
 	public float wallCheckDistance = 1f;
 	public bool checkForEdges = false;
 	private float groundAngle = 0;
+	public HingeJoint2D[] hairs;
 
 	// flags
 	private bool canControl = true;
@@ -138,6 +139,14 @@ public class Player : MonoBehaviour {
 
 				float dir = Mathf.Sign (inputDirection);
 				transform.localScale = new Vector2 (dir, 1);
+
+				for (int i = 0; i < hairs.Length; i++) {
+					JointAngleLimits2D tempLimits = hairs [i].limits;
+					tempLimits.min = dir * -45;
+					tempLimits.max = dir * 45;
+					hairs [i].limits = tempLimits;
+					hairs [i].transform.localScale = new Vector2 (dir, 1);
+				}
 
 //				Transform sprite = transform.Find("Character");
 //				Vector3 scl = sprite.localScale;
