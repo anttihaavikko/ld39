@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour {
 	public Machine[] endMachines;
 	public Sprite[] machineNumbers;
 
+	public Dimmer dimmer;
+
 	private static GameManager instance = null;
 	public static GameManager Instance {
 		get { return instance; }
@@ -50,8 +52,12 @@ public class GameManager : MonoBehaviour {
 				return;
 			}
 		}
+			
+		ShowEnd ("THE END");
+	}
 
-		Debug.Log ("END");
-
+	public void ShowEnd(string text) {
+		dimmer.SetText (text);
+		dimmer.FadeIn (1f);
 	}
 }

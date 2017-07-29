@@ -266,6 +266,8 @@ public class Player : MonoBehaviour {
 				saveMachine.respawns--;
 				saveMachine.ShowNumber ();
 				Invoke ("Respawn", 1f);
+			} else {
+				GameManager.Instance.ShowEnd ("GAME OVER");
 			}
 		}
 	}
