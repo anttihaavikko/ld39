@@ -40,7 +40,7 @@ public class Player : MonoBehaviour {
 	// animations
 	private Animator anim;
 
-	private Machine machine;
+	private Machine machine, saveMachine;
 	public GameObject[] letters;
 
 	// ###############################################################
@@ -239,8 +239,17 @@ public class Player : MonoBehaviour {
 		}
 
 		if (trigger.tag == "Machine") {
+
+			if (machine) {
+				machine.Deactivate ();
+			}
+
 			machine = trigger.GetComponent<Machine> ();
 			machine.Activate ();
+
+			if (machine.isCheckpoint) {
+				saveMachine = machine;
+			}
 		}
 
 		if (trigger.tag == "Water") {
@@ -249,8 +258,8 @@ public class Player : MonoBehaviour {
 	}
 
 	void Respawn() {
-		if (machine) {
-			transform.position = machine.transform.position + Vector3.up * 2f;
+		if (saveMachine) {
+			transform.position = saveMachine.transform.position + Vector3.up * 2f;
 		}
 	}
 

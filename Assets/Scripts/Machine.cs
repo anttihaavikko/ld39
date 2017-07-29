@@ -8,8 +8,13 @@ public class Machine : MonoBehaviour {
 	public GameObject defaultLetter;
 
 	public SpriteRenderer screen;
+	public Sprite readyScreen;
 	public Sprite screenToShow;
+	private Sprite loadingSprite;
+
 	public float showDelay = 1f;
+
+	public bool isCheckpoint = true;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +24,8 @@ public class Machine : MonoBehaviour {
 		if (defaultLetter) {
 			SpawnLetter (defaultLetter);
 		}
+
+		loadingSprite = screen.sprite;
 	}
 
 	public void SpawnLetter(GameObject letter) {
@@ -37,9 +44,16 @@ public class Machine : MonoBehaviour {
 	}
 
 	public void Activate() {
+
+		screen.sprite = readyScreen;
+
 		if (screenToShow) {
 			Invoke ("ChangeScreen", showDelay);
 		}
+	}
+
+	public void Deactivate() {
+		screen.sprite = loadingSprite;
 	}
 
 	public void ChangeScreen() {
