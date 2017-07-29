@@ -236,6 +236,10 @@ public class Player : MonoBehaviour {
 		if (trigger.tag == "Machine") {
 			machine = trigger.GetComponent<Machine> ();
 		}
+
+		if (trigger.tag == "Water") {
+			Respawn ();
+		}
 	}
 
 	void Respawn() {
