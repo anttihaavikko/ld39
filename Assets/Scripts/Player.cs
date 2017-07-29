@@ -56,7 +56,7 @@ public class Player : MonoBehaviour {
 	void Update () {
 
 		if (Input.GetKeyDown (KeyCode.Escape)) {
-			Respawn ();
+			TryRespawn ();
 		}
 
 		LetterSpawning ();
@@ -221,7 +221,7 @@ public class Player : MonoBehaviour {
 		groundAngle = Mathf.Atan2(coll.contacts [0].normal.y, coll.contacts [0].normal.x) * Mathf.Rad2Deg - 90;
 
 		if (coll.gameObject.tag == "DeathBall") {
-			Respawn ();
+			TryRespawn ();
 			Destroy (coll.gameObject);
 		}
 	}
@@ -253,14 +253,26 @@ public class Player : MonoBehaviour {
 		}
 
 		if (trigger.tag == "Water") {
-			Respawn ();
+			TryRespawn ();
+		}
+	}
+
+	void TryRespawn() {
+		if (saveMachine) {
+
+			gameObject.SetActive (false);
+
+			if (saveMachine.respawns > 0) {
+				saveMachine.respawns--;
+				saveMachine.ShowNumber ();
+				Invoke ("Respawn", 1f);
+			}
 		}
 	}
 
 	void Respawn() {
-		if (saveMachine) {
-			transform.position = saveMachine.transform.position + Vector3.up * 2f;
-		}
+		gameObject.SetActive (true);
+		transform.position = saveMachine.transform.position + Vector3.up * 2f;
 	}
 
 	void LetterSpawning() {

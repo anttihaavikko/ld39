@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour {
 
 	private List<GameObject> balls;
 
+	public Machine[] endMachines;
+
 	private static GameManager instance = null;
 	public static GameManager Instance {
 		get { return instance; }
@@ -38,5 +40,17 @@ public class GameManager : MonoBehaviour {
 		Rigidbody2D ballBody = ball.GetComponent<Rigidbody2D> ();
 		ballBody.AddForce (dir, ForceMode2D.Impulse);
 		balls.Add (ball);
+	}
+
+	public void CheckForEnd() {
+
+		for (int i = 0; i < endMachines.Length; i++) {
+			if (!endMachines [i].correct) {
+				return;
+			}
+		}
+
+		Debug.Log ("END");
+
 	}
 }

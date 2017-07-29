@@ -15,6 +15,10 @@ public class Machine : MonoBehaviour {
 	public float showDelay = 1f;
 
 	public bool isCheckpoint = true;
+	public string targetLetter;
+	public bool correct = false;
+
+	public int respawns = 10;
 
 	// Use this for initialization
 	void Start () {
@@ -30,7 +34,11 @@ public class Machine : MonoBehaviour {
 
 	public void SpawnLetter(GameObject letter) {
 		if(area) {
-			Debug.Log ("Spawning " + letter.name);
+			correct = (letter.name == targetLetter);
+
+			if (correct) {
+				GameManager.Instance.CheckForEnd ();
+			}
 
 			// destroy previous
 			foreach(Transform child in area) {
@@ -58,5 +66,9 @@ public class Machine : MonoBehaviour {
 
 	public void ChangeScreen() {
 		screen.sprite = screenToShow;
+	}
+
+	public void ShowNumber() {
+		Debug.Log (respawns + " spawns left");
 	}
 }
