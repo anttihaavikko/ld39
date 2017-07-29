@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -12,6 +13,8 @@ public class GameManager : MonoBehaviour {
 	public Sprite[] machineNumbers;
 
 	public Dimmer dimmer;
+
+	private bool hasEnded = false;
 
 	private static GameManager instance = null;
 	public static GameManager Instance {
@@ -27,6 +30,12 @@ public class GameManager : MonoBehaviour {
 		}
 
 		balls = new List<GameObject> ();
+	}
+
+	void Update() {
+		if (hasEnded && Input.anyKeyDown) {
+			SceneManager.LoadSceneAsync ("Start");
+		}
 	}
 
 	public void ClearDeathBalls() {
@@ -59,5 +68,11 @@ public class GameManager : MonoBehaviour {
 	public void ShowEnd(string text) {
 		dimmer.SetText (text);
 		dimmer.FadeIn (1f);
+
+		Invoke ("EnableEnd", 1.5f);
+	}
+
+	void EnableEnd() {
+		hasEnded = true;
 	}
 }
