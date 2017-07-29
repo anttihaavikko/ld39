@@ -235,6 +235,7 @@ public class Player : MonoBehaviour {
 
 		if (trigger.tag == "Machine") {
 			machine = trigger.GetComponent<Machine> ();
+			machine.Activate ();
 		}
 
 		if (trigger.tag == "Water") {

@@ -7,16 +7,18 @@ public class Machine : MonoBehaviour {
 	public Transform area;
 	public GameObject defaultLetter;
 
+	public SpriteRenderer screen;
+	public Sprite screenToShow;
+	public float showDelay = 1f;
+
 	// Use this for initialization
 	void Start () {
+
+		screen.transform.localScale = new Vector3 (transform.localScale.x, 1, 1);
+
 		if (defaultLetter) {
 			SpawnLetter (defaultLetter);
 		}
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 
 	public void SpawnLetter(GameObject letter) {
@@ -32,5 +34,15 @@ public class Machine : MonoBehaviour {
 			l.transform.localScale = Vector3.one;
 			l.transform.localPosition = Vector3.zero;
 		}
+	}
+
+	public void Activate() {
+		if (screenToShow) {
+			Invoke ("ChangeScreen", showDelay);
+		}
+	}
+
+	public void ChangeScreen() {
+		screen.sprite = screenToShow;
 	}
 }
