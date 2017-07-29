@@ -148,7 +148,7 @@ public class Player : MonoBehaviour {
 //				transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, 90f - dir * 90f, transform.localEulerAngles.z);
 			}
 
-			Vector2 p = transform.position + Vector3.right * inputDirection * wallCheckDistance;
+			Vector2 p = transform.position + Vector3.right * inputDirection * wallCheckDistance + Vector3.down * 0.5f;
 			bool wallHug = Physics2D.OverlapCircle (p, groundCheckRadius, groundLayer);
 			Color hugLineColor = grounded ? Color.green : Color.red;
 			Debug.DrawLine (transform.position, p, hugLineColor, 0.2f);
@@ -217,5 +217,11 @@ public class Player : MonoBehaviour {
 			groundAngle = 0;
 		}
 		return groundAngle;
+	}
+
+	void OnTriggerEnter2D(Collider2D trigger) {
+		if (trigger.tag == "Room") {
+			trigger.GetComponent<Room> ().Focus ();
+		}
 	}
 }
