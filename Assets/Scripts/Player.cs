@@ -109,6 +109,8 @@ public class Player : MonoBehaviour {
 
 				jumpBufferedFor = 0;
 
+				AudioManager.Instance.PlayEffectAt(0, transform.position);
+
 				// jump sounds
 				if (audioSource && jumpClip) {
 					audioSource.PlayOneShot (jumpClip);
@@ -192,6 +194,8 @@ public class Player : MonoBehaviour {
 
 		doubleJumped = false;
 
+		AudioManager.Instance.PlayEffectAt(1, transform.position);
+
 		// landing sound
 		if (audioSource && landClip) {
 			audioSource.PlayOneShot (landClip);
@@ -221,6 +225,7 @@ public class Player : MonoBehaviour {
 		groundAngle = Mathf.Atan2(coll.contacts [0].normal.y, coll.contacts [0].normal.x) * Mathf.Rad2Deg - 90;
 
 		if (coll.gameObject.tag == "DeathBall") {
+			AudioManager.Instance.PlayEffectAt(5, transform.position);
 			TryRespawn ();
 			Destroy (coll.gameObject);
 		}
@@ -253,6 +258,7 @@ public class Player : MonoBehaviour {
 		}
 
 		if (trigger.tag == "Water") {
+			AudioManager.Instance.PlayEffectAt(4, transform.position);
 			TryRespawn ();
 		}
 	}
@@ -273,6 +279,7 @@ public class Player : MonoBehaviour {
 	}
 
 	void Respawn() {
+		AudioManager.Instance.PlayEffectAt(3, transform.position);
 		gameObject.SetActive (true);
 		transform.position = saveMachine.transform.position + Vector3.up * 2f;
 	}

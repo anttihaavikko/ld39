@@ -14,7 +14,7 @@ public class SoundEffect : MonoBehaviour {
 
 		name = clip.name;
 
-		float targetPitch = 1f;
+		audioSource.pitch = Random.Range (0.8f, 1.2f);
 		audioSource.PlayOneShot (clip, AudioManager.Instance.volume * volume);
 
 		Invoke ("DoDestroy", clip.length * 1.2f);
