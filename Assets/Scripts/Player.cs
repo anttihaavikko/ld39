@@ -20,7 +20,6 @@ public class Player : MonoBehaviour {
 	public float wallCheckDistance = 1f;
 	public bool checkForEdges = false;
 	private float groundAngle = 0;
-	public HingeJoint2D[] hairs;
 
 	// flags
 	private bool canControl = true;
@@ -115,6 +114,7 @@ public class Player : MonoBehaviour {
 				if (anim) {
 					anim.speed = 1f;
 					anim.SetTrigger ("jump");
+					anim.ResetTrigger ("land");
 				}
 
 				body.AddForce (Vector2.up * jump, ForceMode2D.Impulse);
@@ -140,14 +140,6 @@ public class Player : MonoBehaviour {
 				float dir = Mathf.Sign (inputDirection);
 				transform.localScale = new Vector2 (dir, 1);
 
-				for (int i = 0; i < hairs.Length; i++) {
-					JointAngleLimits2D tempLimits = hairs [i].limits;
-					tempLimits.min = dir * -45;
-					tempLimits.max = dir * 45;
-					hairs [i].limits = tempLimits;
-					hairs [i].transform.localScale = new Vector2 (dir, 1);
-				}
-
 //				Transform sprite = transform.Find("Character");
 //				Vector3 scl = sprite.localScale;
 //				scl.x = dir;
@@ -161,19 +153,23 @@ public class Player : MonoBehaviour {
 			Color hugLineColor = grounded ? Color.green : Color.red;
 			Debug.DrawLine (transform.position, p, hugLineColor, 0.2f);
 
+			running = inputDirection < -inputBuffer || inputDirection > inputBuffer;
+
 			if (wallHug && !checkForEdges) {
 				body.velocity = new Vector2 (0, body.velocity.y);
+				running = false;
 			}
-
-			running = inputDirection < -inputBuffer || inputDirection > inputBuffer;
 
 			if (!grounded) {
 				running = false; 
 			}
 
 			if (anim) {
+
+				anim.SetBool ("running", running);
+
 				if (running) {
-					anim.speed = Mathf.Abs (body.velocity.x * 0.2f);
+					anim.speed = Mathf.Abs (body.velocity.x * 0.18f);
 					anim.SetFloat ("speed", Mathf.Abs(body.velocity.x));
 				} else {
 					anim.speed = 1f;
