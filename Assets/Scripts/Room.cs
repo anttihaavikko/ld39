@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class Room : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	public Transform[] deathBalls;
+	public Vector3[] deathBallDirections;
 
 	public void Focus() {
 		Camera.main.GetComponent<RoomCamera>().target = new Vector3 (transform.position.x, transform.position.y, Camera.main.transform.position.z);
+
+		GameManager.Instance.ClearDeathBalls ();
+
+		if (deathBalls.Length > 0) {
+			for (int i = 0; i < deathBalls.Length; i++) {
+				GameManager.Instance.AddDeathBall (deathBalls [i].position, deathBallDirections[i]);
+			}
+		}
 	}
 }

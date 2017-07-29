@@ -219,6 +219,11 @@ public class Player : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D coll) {
 		groundAngle = Mathf.Atan2(coll.contacts [0].normal.y, coll.contacts [0].normal.x) * Mathf.Rad2Deg - 90;
+
+		if (coll.gameObject.tag == "DeathBall") {
+			Respawn ();
+			Destroy (coll.gameObject);
+		}
 	}
 
 	public float GetGroundAngle() {
