@@ -338,109 +338,116 @@ public class Player : MonoBehaviour {
 	}
 
 	void LetterSpawning() {
+
+		bool didSpawn = false;
 		
 		if (machine && Input.GetKeyDown (KeyCode.A)) {
-			machine.SpawnLetter (letters [0]);
+			didSpawn = machine.SpawnLetter (letters [0]);
 		}
 
 		if (machine && Input.GetKeyDown (KeyCode.B)) {
-			machine.SpawnLetter (letters [1]);
+			didSpawn = machine.SpawnLetter (letters [1]);
 		}
 
 		if (machine && Input.GetKeyDown (KeyCode.C)) {
-			machine.SpawnLetter (letters [2]);
+			didSpawn = machine.SpawnLetter (letters [2]);
 		}
 
 		if (machine && Input.GetKeyDown (KeyCode.D)) {
-			machine.SpawnLetter (letters [3]);
+			didSpawn = machine.SpawnLetter (letters [3]);
 		}
 
 		if (machine && Input.GetKeyDown (KeyCode.E)) {
-			machine.SpawnLetter (letters [4]);
+			didSpawn = machine.SpawnLetter (letters [4]);
 		}
 
 		if (machine && Input.GetKeyDown (KeyCode.F)) {
-			machine.SpawnLetter (letters [5]);
+			didSpawn = machine.SpawnLetter (letters [5]);
 		}
 
 		if (machine && Input.GetKeyDown (KeyCode.G)) {
-			machine.SpawnLetter (letters [6]);
+			didSpawn = machine.SpawnLetter (letters [6]);
 		}
 
 		if (machine && Input.GetKeyDown (KeyCode.H)) {
-			machine.SpawnLetter (letters [7]);
+			didSpawn = machine.SpawnLetter (letters [7]);
 		}
 
 		if (machine && Input.GetKeyDown (KeyCode.I)) {
-			machine.SpawnLetter (letters [8]);
+			didSpawn = machine.SpawnLetter (letters [8]);
 		}
 
 		if (machine && Input.GetKeyDown (KeyCode.J)) {
-			machine.SpawnLetter (letters [9]);
+			didSpawn = machine.SpawnLetter (letters [9]);
 		}
 
 		if (machine && Input.GetKeyDown (KeyCode.K)) {
-			machine.SpawnLetter (letters [10]);
+			didSpawn = machine.SpawnLetter (letters [10]);
 		}
 
 		if (machine && Input.GetKeyDown (KeyCode.L)) {
-			machine.SpawnLetter (letters [11]);
+			didSpawn = machine.SpawnLetter (letters [11]);
 		}
 
 		if (machine && Input.GetKeyDown (KeyCode.M)) {
-			machine.SpawnLetter (letters [12]);
+			didSpawn = machine.SpawnLetter (letters [12]);
 		}
 
 		if (machine && Input.GetKeyDown (KeyCode.N)) {
-			machine.SpawnLetter (letters [13]);
+			didSpawn = machine.SpawnLetter (letters [13]);
 		}
 
 		if (machine && Input.GetKeyDown (KeyCode.O)) {
-			machine.SpawnLetter (letters [14]);
+			didSpawn = machine.SpawnLetter (letters [14]);
 		}
 
 		if (machine && Input.GetKeyDown (KeyCode.P)) {
-			machine.SpawnLetter (letters [15]);
+			didSpawn = machine.SpawnLetter (letters [15]);
 		}
 
 		if (machine && Input.GetKeyDown (KeyCode.Q)) {
-			machine.SpawnLetter (letters [16]);
+			didSpawn = machine.SpawnLetter (letters [16]);
 		}
 
 		if (machine && Input.GetKeyDown (KeyCode.R)) {
-			machine.SpawnLetter (letters [17]);
+			didSpawn = machine.SpawnLetter (letters [17]);
 		}
 
 		if (machine && Input.GetKeyDown (KeyCode.S)) {
-			machine.SpawnLetter (letters [18]);
+			didSpawn = machine.SpawnLetter (letters [18]);
 		}
 
 		if (machine && Input.GetKeyDown (KeyCode.T)) {
-			machine.SpawnLetter (letters [19]);
+			didSpawn = machine.SpawnLetter (letters [19]);
 		}
 
 		if (machine && Input.GetKeyDown (KeyCode.U)) {
-			machine.SpawnLetter (letters [20]);
+			didSpawn = machine.SpawnLetter (letters [20]);
 		}
 
 		if (machine && Input.GetKeyDown (KeyCode.V)) {
-			machine.SpawnLetter (letters [21]);
+			didSpawn = machine.SpawnLetter (letters [21]);
 		}
 
 		if (machine && Input.GetKeyDown (KeyCode.W)) {
-			machine.SpawnLetter (letters [22]);
+			didSpawn = machine.SpawnLetter (letters [22]);
 		}
 
 		if (machine && Input.GetKeyDown (KeyCode.X)) {
-			machine.SpawnLetter (letters [23]);
+			didSpawn = machine.SpawnLetter (letters [23]);
 		}
 
 		if (machine && Input.GetKeyDown (KeyCode.Y)) {
-			machine.SpawnLetter (letters [24]);
+			didSpawn = machine.SpawnLetter (letters [24]);
 		}
 
 		if (machine && Input.GetKeyDown (KeyCode.Z)) {
-			machine.SpawnLetter (letters [25]);
+			didSpawn = machine.SpawnLetter (letters [25]);
+		}
+
+		if (didSpawn) {
+			anim.ResetTrigger ("cast");
+			anim.SetTrigger ("cast");
 		}
 	}
 }

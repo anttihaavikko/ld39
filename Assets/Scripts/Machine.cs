@@ -34,11 +34,11 @@ public class Machine : MonoBehaviour {
 		loadingSprite = screen.sprite;
 	}
 
-	public void SpawnLetter(GameObject letter) {
-		SpawnLetter (letter, true);
+	public bool SpawnLetter(GameObject letter) {
+		return SpawnLetter (letter, true);
 	}
 
-	public void SpawnLetter(GameObject letter, bool doSound) {
+	public bool SpawnLetter(GameObject letter, bool doSound) {
 		if(area) {
 
 			correct = (letter.name == targetLetter);
@@ -73,7 +73,11 @@ public class Machine : MonoBehaviour {
 			GameObject l = Instantiate (letter, area);
 			l.transform.localScale = Vector3.one;
 			l.transform.localPosition = Vector3.zero;
+
+			return true;
 		}
+
+		return false;
 	}
 
 	public void Activate() {
