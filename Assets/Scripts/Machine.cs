@@ -22,6 +22,8 @@ public class Machine : MonoBehaviour {
 
 	public bool beeping = false;
 
+	private Vector3 areaSize;
+
 	// Use this for initialization
 	void Start () {
 
@@ -32,6 +34,16 @@ public class Machine : MonoBehaviour {
 		}
 
 		loadingSprite = screen.sprite;
+
+		if (area) {
+			areaSize = area.localScale;
+		}
+	}
+
+	void Update() {
+		if (area) {
+			area.localScale = Vector3.MoveTowards(area.localScale, areaSize, 0.05f);
+		}
 	}
 
 	public bool SpawnLetter(GameObject letter) {
@@ -40,6 +52,8 @@ public class Machine : MonoBehaviour {
 
 	public bool SpawnLetter(GameObject letter, bool doSound) {
 		if(area) {
+
+			area.localScale *= 1.075f;
 
 			correct = (letter.name == targetLetter);
 
