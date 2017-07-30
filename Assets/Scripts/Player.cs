@@ -195,12 +195,13 @@ public class Player : MonoBehaviour {
 
 			Vector2 p = transform.position + Vector3.right * inputDirection * wallCheckDistance + Vector3.down * 0.5f;
 			bool wallHug = Physics2D.OverlapCircle (p, groundCheckRadius, groundLayer);
+			bool wallHugTop = Physics2D.OverlapCircle (p + Vector2.up * 1f, groundCheckRadius, groundLayer);
 			Color hugLineColor = grounded ? Color.green : Color.red;
 			Debug.DrawLine (transform.position, p, hugLineColor, 0.2f);
 
 			running = inputDirection < -inputBuffer || inputDirection > inputBuffer;
 
-			if (wallHug && !checkForEdges) {
+			if ((wallHug || wallHugTop) && !checkForEdges) {
 				body.velocity = new Vector2 (0, body.velocity.y);
 				running = false;
 			}
