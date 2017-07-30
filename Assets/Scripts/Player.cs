@@ -332,9 +332,11 @@ public class Player : MonoBehaviour {
 	}
 
 	void Respawn() {
-		AudioManager.Instance.PlayEffectAt(3, transform.position);
 		gameObject.SetActive (true);
 		transform.position = saveMachine.transform.position + Vector3.up * 2f;
+
+		EffectManager.Instance.AddEffect (6, transform.position);
+		AudioManager.Instance.PlayEffectAt(3, transform.position);
 	}
 
 	void LetterSpawning() {
@@ -448,6 +450,7 @@ public class Player : MonoBehaviour {
 		if (didSpawn) {
 			anim.ResetTrigger ("cast");
 			anim.SetTrigger ("cast");
+			EffectManager.Instance.AddEffect (6, transform.position);
 		}
 	}
 }
