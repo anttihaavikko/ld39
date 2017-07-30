@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.ImageEffects;
 
 public class RoomCamera : MonoBehaviour {
 
@@ -10,6 +11,8 @@ public class RoomCamera : MonoBehaviour {
 	private float shakeAmount = 0;
 	private float shakeTime = 0;
 	private Vector3 directionalShake = Vector3.zero;
+
+	private VignetteAndChromaticAberration chroma;
 
 	// Use this for initialization
 	void Start () {
@@ -28,6 +31,8 @@ public class RoomCamera : MonoBehaviour {
 			backgroundCam.backgroundColor = Color.black;
 			backgroundCam.cullingMask = 0;
 		}
+
+		chroma = GetComponent<VignetteAndChromaticAberration> ();
 	}
 	
 	// Update is called once per frame
@@ -42,6 +47,8 @@ public class RoomCamera : MonoBehaviour {
 		}
 
 		transform.position += directionalShake;
+
+		chroma.chromaticAberration = Mathf.MoveTowards (chroma.chromaticAberration, 0, 1f);
 	}
 
 	public void Shake(float amount, float duration) {
@@ -51,5 +58,9 @@ public class RoomCamera : MonoBehaviour {
 
 	public void Shake(Vector3 dir) {
 		directionalShake = dir;
+	}
+
+	public void Chromate(float amount) {
+		chroma.chromaticAberration = Screen.width / 7 * amount;
 	}
 }

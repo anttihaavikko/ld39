@@ -255,6 +255,7 @@ public class Player : MonoBehaviour {
 
 	private void Die() {
 
+		cam.Chromate (0.05f);
 		cam.Shake (0.2f, 0.1f);
 
 		EffectManager.Instance.AddEffect (1, transform.position);
@@ -293,6 +294,7 @@ public class Player : MonoBehaviour {
 
 		if (trigger.tag == "Water") {
 			cam.Shake (0.15f, 0.1f);
+			cam.Chromate (0.04f);
 
 			EffectManager.Instance.AddEffect (2, transform.position);
 

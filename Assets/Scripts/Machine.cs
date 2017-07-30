@@ -50,6 +50,9 @@ public class Machine : MonoBehaviour {
 				AudioManager.Instance.PlayEffectAt (14, area.position, 0.5f);
 
 				if (correct) {
+
+					Camera.main.GetComponent<RoomCamera>().Chromate (0.07f);
+
 					AudioManager.Instance.PlayEffectAt (8, area.position, 0.5f);
 					EffectManager.Instance.AddEffect (5, transform.position + Vector3.up * 2.5f);
 				} else {
