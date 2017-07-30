@@ -39,6 +39,8 @@ public class Player : MonoBehaviour {
 
 	// animations
 	private Animator anim;
+	public Transform face;
+	private Vector3 facePos;
 
 	private Machine machine, saveMachine;
 	public GameObject[] letters;
@@ -54,6 +56,8 @@ public class Player : MonoBehaviour {
 		anim = GetComponentInChildren<Animator> ();
 
 		cam = Camera.main.GetComponent<RoomCamera> ();
+
+		facePos = face.localPosition;
 	}
 	
 	// Update is called once per frame
@@ -62,6 +66,11 @@ public class Player : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Escape)) {
 			TryRespawn ();
 		}
+
+		float faceMove = 0.1f;
+		float fx = Mathf.PerlinNoise (Time.time * 0.5f, 0f) - 0.5f;
+		float fy = Mathf.PerlinNoise (Time.time * 0.5f, 1000f) - 0.5f;
+		face.localPosition = facePos + new Vector3 (fx * faceMove, fy * faceMove, 0);
 
 		LetterSpawning ();
 
