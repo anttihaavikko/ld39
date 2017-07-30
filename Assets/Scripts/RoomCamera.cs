@@ -7,6 +7,10 @@ public class RoomCamera : MonoBehaviour {
 	public Vector3 target;
 	static Camera backgroundCam;
 
+	private float shakeAmount = 0;
+	private float shakeTime = 0;
+	private Vector3 directionalShake = Vector3.zero;
+
 	// Use this for initialization
 	void Start () {
 		target = transform.position;
@@ -29,5 +33,23 @@ public class RoomCamera : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		transform.position = Vector3.MoveTowards (transform.position, target, 2f);
+
+		directionalShake = Vector3.MoveTowards (directionalShake, Vector3.zero, Time.deltaTime);
+
+		if (shakeTime > 0) {
+			shakeTime -= Time.deltaTime;
+			transform.position += new Vector3(Random.Range(-shakeAmount, shakeAmount), Random.Range(-shakeAmount, shakeAmount), 0);
+		}
+
+		transform.position += directionalShake;
+	}
+
+	public void Shake(float amount, float duration) {
+		shakeAmount = amount;
+		shakeTime = duration;
+	}
+
+	public void Shake(Vector3 dir) {
+		directionalShake = dir;
 	}
 }

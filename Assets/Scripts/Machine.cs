@@ -45,6 +45,8 @@ public class Machine : MonoBehaviour {
 
 			if (doSound) {
 
+				Camera.main.GetComponent<RoomCamera>().Shake (0.05f, 0.05f);
+
 				AudioManager.Instance.PlayEffectAt (14, area.position, 0.5f);
 
 				if (correct) {

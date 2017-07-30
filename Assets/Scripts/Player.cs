@@ -43,6 +43,8 @@ public class Player : MonoBehaviour {
 	private Machine machine, saveMachine;
 	public GameObject[] letters;
 
+	private RoomCamera cam;
+
 	// ###############################################################
 
 	// Use this for initialization
@@ -50,6 +52,8 @@ public class Player : MonoBehaviour {
 		body = GetComponent<Rigidbody2D> ();
 		audioSource = GetComponent<AudioSource> ();
 		anim = GetComponentInChildren<Animator> ();
+
+		cam = Camera.main.GetComponent<RoomCamera> ();
 	}
 	
 	// Update is called once per frame
@@ -243,9 +247,16 @@ public class Player : MonoBehaviour {
 			EffectManager.Instance.AddEffect (0, coll.transform.position);
 			Destroy (coll.gameObject);
 		}
+
+		if (Mathf.Abs(coll.relativeVelocity.y) > 12f) {
+			cam.Shake (-coll.relativeVelocity * 0.01f);
+		}
 	}
 
 	private void Die() {
+
+		cam.Shake (0.2f, 0.1f);
+
 		EffectManager.Instance.AddEffect (1, transform.position);
 		EffectManager.Instance.AddEffect (3, transform.position);
 
@@ -281,6 +292,8 @@ public class Player : MonoBehaviour {
 		}
 
 		if (trigger.tag == "Water") {
+			cam.Shake (0.15f, 0.1f);
+
 			EffectManager.Instance.AddEffect (2, transform.position);
 
 			AudioManager.Instance.PlayEffectAt(4, transform.position);
