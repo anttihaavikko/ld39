@@ -274,6 +274,9 @@ public class Player : MonoBehaviour {
 				saveMachine.respawns--;
 				saveMachine.ShowNumber ();
 				Invoke ("Respawn", 1f);
+
+				GameManager.Instance.colorValue = saveMachine.respawns * 0.1f;
+
 			} else {
 				GameManager.Instance.ShowEnd ("GAME OVER");
 			}

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -13,8 +14,11 @@ public class GameManager : MonoBehaviour {
 	public Sprite[] machineNumbers;
 
 	public Dimmer dimmer;
+	public Image colorizer;
 
 	private bool hasEnded = false;
+
+	public float colorHue, colorValue = 0f;
 
 	private static GameManager instance = null;
 	public static GameManager Instance {
@@ -36,6 +40,8 @@ public class GameManager : MonoBehaviour {
 		if (hasEnded && Input.anyKeyDown) {
 			SceneManager.LoadSceneAsync ("Start");
 		}
+
+//		colorizer.color = Color.HSVToRGB (colorHue, 0.2f, colorValue);
 	}
 
 	public void ClearDeathBalls() {

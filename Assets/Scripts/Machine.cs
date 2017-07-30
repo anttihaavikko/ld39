@@ -44,10 +44,13 @@ public class Machine : MonoBehaviour {
 			correct = (letter.name == targetLetter);
 
 			if (doSound) {
+
+				AudioManager.Instance.PlayEffectAt (14, area.position, 0.5f);
+
 				if (correct) {
-					AudioManager.Instance.PlayEffectAt (8, transform.position, 0.5f);
+					AudioManager.Instance.PlayEffectAt (8, area.position, 0.5f);
 				} else {
-					AudioManager.Instance.PlayEffectAt (7, transform.position, 0.5f);
+					AudioManager.Instance.PlayEffectAt (7, area.position, 0.5f);
 				}
 			}
 
