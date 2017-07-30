@@ -19,6 +19,7 @@ public class Machine : MonoBehaviour {
 	public bool correct = false;
 
 	public int respawns = 10;
+	private bool respawnProtected = false;
 
 	public bool beeping = false;
 
@@ -44,6 +45,25 @@ public class Machine : MonoBehaviour {
 		if (area) {
 			area.localScale = Vector3.MoveTowards(area.localScale, areaSize, 0.05f);
 		}
+	}
+
+	public bool TryRespawn() {
+
+		if (!respawnProtected) {
+			respawns--;
+			respawnProtected = true;
+
+			Invoke ("EnableRespawn", 0.5f);
+
+		} else {
+			Debug.Log ("???");
+		}
+
+		return (respawns > -1);
+	}
+
+	void EnableRespawn() {
+		respawnProtected = false;
 	}
 
 	public bool SpawnLetter(GameObject letter) {

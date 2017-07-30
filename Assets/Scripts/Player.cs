@@ -331,8 +331,8 @@ public class Player : MonoBehaviour {
 
 			gameObject.SetActive (false);
 
-			if (saveMachine.respawns > 0) {
-				saveMachine.respawns--;
+			if (saveMachine.TryRespawn()) {
+
 				saveMachine.ShowNumber ();
 				Invoke ("Respawn", 1f);
 
