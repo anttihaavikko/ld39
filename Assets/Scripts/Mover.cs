@@ -11,6 +11,9 @@ public class Mover : MonoBehaviour {
 	private Rigidbody2D body;
 	private Vector3 originalPosition;
 
+	public bool useBody = true;
+	public bool absolute = false;
+
 	// Use this for initialization
 	void Start () {
 		originalPosition = transform.localPosition;
@@ -19,7 +22,14 @@ public class Mover : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-//		transform.localPosition = originalPosition + direction * Mathf.Sin (Time.time * speed + offset * Mathf.PI);
-		body.MovePosition (originalPosition + direction * Mathf.Sin (Time.time * speed + offset * Mathf.PI));
+
+		float amt = Mathf.Sin (Time.time * speed + offset * Mathf.PI);
+		amt = absolute ? Mathf.Abs(amt) : amt;
+
+		if (useBody) {
+			body.MovePosition (originalPosition + direction * amt);
+		} else {
+			transform.localPosition = originalPosition + direction * amt;
+		}
 	}
 }
