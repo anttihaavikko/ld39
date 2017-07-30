@@ -8,6 +8,9 @@ public class Room : MonoBehaviour {
 	public Vector3[] deathBallDirections;
 
 	public void Focus() {
+
+		AudioManager.Instance.PlayEffectAt(11, transform.position, 0.1f);
+
 		Camera.main.GetComponent<RoomCamera>().target = new Vector3 (transform.position.x, transform.position.y, Camera.main.transform.position.z);
 
 		GameManager.Instance.ClearDeathBalls ();

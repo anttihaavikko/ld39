@@ -226,6 +226,7 @@ public class Player : MonoBehaviour {
 
 		if (coll.gameObject.tag == "DeathBall") {
 			AudioManager.Instance.PlayEffectAt(5, transform.position);
+			AudioManager.Instance.PlayEffectAt(13, transform.position, 0.3f);
 			TryRespawn ();
 			Destroy (coll.gameObject);
 		}
@@ -259,6 +260,7 @@ public class Player : MonoBehaviour {
 
 		if (trigger.tag == "Water") {
 			AudioManager.Instance.PlayEffectAt(4, transform.position);
+			AudioManager.Instance.PlayEffectAt(12, transform.position, 0.3f);
 			TryRespawn ();
 		}
 	}
