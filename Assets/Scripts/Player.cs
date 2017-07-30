@@ -47,6 +47,8 @@ public class Player : MonoBehaviour {
 
 	private RoomCamera cam;
 
+	private float escHeldFor = 0f;
+
 	// ###############################################################
 
 	// Use this for initialization
@@ -63,7 +65,18 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKeyDown (KeyCode.Escape)) {
+		if (Input.GetKey (KeyCode.Escape)) {
+			escHeldFor += Time.deltaTime;
+
+			if (escHeldFor >= 1f) {
+				Application.Quit ();
+				Debug.Log ("Quit...");
+			}
+		}
+
+		if (Input.GetKeyUp (KeyCode.Escape)) {
+			escHeldFor = 0f;
+			GameManager.Instance.ShowQuitHelp ();
 			Die ();
 		}
 

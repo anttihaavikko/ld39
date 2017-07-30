@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour {
 
 	public float colorHue, colorValue = 0f;
 
+	public Text quitHelp;
+	private float quitHelpAlpha = 0f;
+
 	private static GameManager instance = null;
 	public static GameManager Instance {
 		get { return instance; }
@@ -41,7 +44,14 @@ public class GameManager : MonoBehaviour {
 			SceneManager.LoadSceneAsync ("Start");
 		}
 
+		quitHelpAlpha = Mathf.MoveTowards (quitHelpAlpha, 0f, 0.03f);
+		quitHelp.color = new Color (1f, 1f, 1f, Mathf.Min(quitHelpAlpha, 1f));
+
 //		colorizer.color = Color.HSVToRGB (colorHue, 0.2f, colorValue);
+	}
+
+	public void ShowQuitHelp() {
+		quitHelpAlpha = 3f;
 	}
 
 	public void ClearDeathBalls() {
