@@ -6,5 +6,6 @@ public class DeathBall : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D coll) {
 		AudioManager.Instance.PlayEffectAt(6, transform.position, 0.1f);
+		EffectManager.Instance.AddEffect (6, coll.contacts[0].point);
 	}
 }
