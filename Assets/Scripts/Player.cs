@@ -64,7 +64,7 @@ public class Player : MonoBehaviour {
 	void Update () {
 
 		if (Input.GetKeyDown (KeyCode.Escape)) {
-			TryRespawn ();
+			Die ();
 		}
 
 		float faceMove = 0.1f;
