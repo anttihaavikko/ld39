@@ -107,6 +107,7 @@ public class Machine : MonoBehaviour {
 		if (!beeping) {
 			beeping = true;
 			AudioManager.Instance.PlayEffectAt(2, transform.position, 0.25f);
+			EffectManager.Instance.AddEffect (6, transform.position + Vector3.up * 1.5f);
 			Invoke ("EnableBeep", 2.5f);
 		}
 
@@ -128,11 +129,13 @@ public class Machine : MonoBehaviour {
 
 	public void ChangeScreen() {
 		AudioManager.Instance.PlayEffectAt (9, transform.position, 0.25f);
+		EffectManager.Instance.AddEffect (6, transform.position + Vector3.up * 1.5f);
 		screen.sprite = screenToShow;
 	}
 
 	public void ShowNumber() {
 		AudioManager.Instance.PlayEffectAt (9, transform.position, 0.25f);
+		EffectManager.Instance.AddEffect (6, transform.position + Vector3.up * 1.5f);
 		screen.sprite = GameManager.Instance.machineNumbers [respawns];
 		Debug.Log (respawns + " spawns left");
 	}
