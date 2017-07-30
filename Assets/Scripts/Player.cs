@@ -118,7 +118,15 @@ public class Player : MonoBehaviour {
 
 				// jump particles
 				if (jumpParticles) {
-					Instantiate (jumpParticles, groundCheck.position, Quaternion.identity);
+
+					GameObject go = Instantiate (jumpParticles, transform);
+					ParticleSystem ps = go.GetComponent<ParticleSystem> ();
+					ParticleSystem.MainModule mm = ps.main;
+					ParticleSystem.ShapeModule sm = ps.shape;
+
+					mm.startRotationZ = inputDirection * 0.4f;
+					sm.radius = Random.Range (0.3f, 0.7f); 
+					sm.radiusSpread = Random.Range(0.1f, 0.4f);
 				}
 
 				// animation
@@ -169,6 +177,10 @@ public class Player : MonoBehaviour {
 			if (wallHug && !checkForEdges) {
 				body.velocity = new Vector2 (0, body.velocity.y);
 				running = false;
+			}
+
+			if (Physics2D.OverlapCircle (transform.position + Vector3.up * 0.5f, groundCheckRadius, groundLayer)) {
+				Die ();
 			}
 
 			if (!grounded) {
@@ -226,16 +238,20 @@ public class Player : MonoBehaviour {
 
 		if (coll.gameObject.tag == "DeathBall") {
 
-			EffectManager.Instance.AddEffect (1, transform.position);
-			EffectManager.Instance.AddEffect (3, transform.position);
-
-			AudioManager.Instance.PlayEffectAt(5, transform.position);
-			AudioManager.Instance.PlayEffectAt(13, transform.position, 0.3f);
-			TryRespawn ();
+			Die ();
 
 			EffectManager.Instance.AddEffect (0, coll.transform.position);
 			Destroy (coll.gameObject);
 		}
+	}
+
+	private void Die() {
+		EffectManager.Instance.AddEffect (1, transform.position);
+		EffectManager.Instance.AddEffect (3, transform.position);
+
+		AudioManager.Instance.PlayEffectAt(5, transform.position);
+		AudioManager.Instance.PlayEffectAt(13, transform.position, 0.3f);
+		TryRespawn ();
 	}
 
 	public float GetGroundAngle() {
