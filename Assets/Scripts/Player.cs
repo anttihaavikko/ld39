@@ -203,7 +203,7 @@ public class Player : MonoBehaviour {
 
 		// landing particles
 		if (landParticles) {
-			Instantiate (landParticles, groundCheck.position, Quaternion.identity);
+			Instantiate (landParticles, groundCheck.position + Vector3.down * 0.5f, Quaternion.identity);
 		}
 
 		// animation
@@ -225,9 +225,15 @@ public class Player : MonoBehaviour {
 		groundAngle = Mathf.Atan2(coll.contacts [0].normal.y, coll.contacts [0].normal.x) * Mathf.Rad2Deg - 90;
 
 		if (coll.gameObject.tag == "DeathBall") {
+
+			EffectManager.Instance.AddEffect (1, transform.position);
+			EffectManager.Instance.AddEffect (3, transform.position);
+
 			AudioManager.Instance.PlayEffectAt(5, transform.position);
 			AudioManager.Instance.PlayEffectAt(13, transform.position, 0.3f);
 			TryRespawn ();
+
+			EffectManager.Instance.AddEffect (0, coll.transform.position);
 			Destroy (coll.gameObject);
 		}
 	}
@@ -259,6 +265,8 @@ public class Player : MonoBehaviour {
 		}
 
 		if (trigger.tag == "Water") {
+			EffectManager.Instance.AddEffect (2, transform.position);
+
 			AudioManager.Instance.PlayEffectAt(4, transform.position);
 			AudioManager.Instance.PlayEffectAt(12, transform.position, 0.3f);
 			TryRespawn ();

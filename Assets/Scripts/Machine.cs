@@ -49,8 +49,10 @@ public class Machine : MonoBehaviour {
 
 				if (correct) {
 					AudioManager.Instance.PlayEffectAt (8, area.position, 0.5f);
+					EffectManager.Instance.AddEffect (5, transform.position + Vector3.up * 2.5f);
 				} else {
 					AudioManager.Instance.PlayEffectAt (7, area.position, 0.5f);
+//					EffectManager.Instance.AddEffect (4, area.position);
 				}
 			}
 
